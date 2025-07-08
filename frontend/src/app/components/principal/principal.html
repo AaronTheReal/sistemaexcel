@@ -1,0 +1,18 @@
+<div class="container">
+  <h2>Excel Invoice</h2>
+
+  <div class="section">
+    <label>Selecciona una imagen:</label>
+    <input type="file" (change)="onImagenChange($event)" accept="image/*" />
+    <div class="preview" *ngIf="preview">
+      <img [src]="preview" width="300" />
+    </div>
+  </div>
+
+<div class="section">
+  <label>Selecciona imágenes adicionales (PDF en imágenes):</label>
+  <input type="file" (change)="onImagenesAdicionalesChange($event)" accept="image/*" multiple />
+</div>
+
+  <button (click)="enviar()">Convertir a Excel</button>
+</div>
