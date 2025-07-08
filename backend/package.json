@@ -1,0 +1,41 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/vision": "^5.2.0",
+    "@mux/mux-node": "^11.1.0",
+    "axios": "^1.10.0",
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^2.4.3",
+    "cheerio": "^1.1.0",
+    "cors": "^2.8.5",
+    "date-fns": "^4.1.0",
+    "dompurify": "^3.2.6",
+    "dotenv": "^16.5.0",
+    "exceljs": "^4.4.0",
+    "express": "^4.19.2",
+    "http": "^0.0.1-security",
+    "jsdom": "^26.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "marked": "^15.0.12",
+    "mongodb": "^6.7.0",
+    "mongoose": "^8.16.0",
+    "mongoose-paginate-v2": "^1.8.2",
+    "multer": "^1.4.5-lts.1",
+    "node-tesseract-ocr": "^2.2.1",
+    "nodemon": "^3.1.10",
+    "pdf-poppler": "^0.2.1",
+    "pdfkit": "^0.15.0",
+    "sharp": "^0.34.2",
+    "socket.io": "^4.8.1",
+    "xlsx": "^0.18.5"
+  }
+}
