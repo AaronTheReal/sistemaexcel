@@ -222,28 +222,34 @@ export default class MainController {
     const titleRow = ["INVOICE"];
     const invoiceFieldRow = ["", "", "", "", "", "", "Invoice#:"];
     const emptyRow = [];
-    const emptyRowsBeforeFields = Array(5).fill(emptyRow); // Filas 3 a 7
+    const emptyRowsBeforeFields = [emptyRow, emptyRow, emptyRow]; // Filas 3 a 5
     const agencyRow = ["Agency:"];
     const addressRow = ["Address:"];
     const buyerRow = ["Buyer:"];
     const advertiserRow = ["Advertiser:"];
     const productRow = ["Product:"];
+    const netAmountRow = ["", "", "", "", "", "", "Net Amount Due:"]; // Esto va en fila 6, columna G (índice 6)
+    const stationRow = ["", "", "", "", "", "", "Station(s):"]
     const emptyRowsAfterFields = Array(8).fill(emptyRow); // Filas 13 a 20
-
+    
     // Combinar todas las filas
     const wsData = [
-      titleRow, // Fila 1
-      invoiceFieldRow, // Fila 2
-      ...emptyRowsBeforeFields, // Filas 3 a 7
-      agencyRow, // Fila 8
-      addressRow, // Fila 9
-      buyerRow, // Fila 10
-      advertiserRow, // Fila 11
-      productRow, // Fila 12
-      ...emptyRowsAfterFields, // Filas 13 a 20
-      headerRow, // Fila 21
-      ...dataRows // Filas 22 en adelante
+      titleRow,          // Fila 1
+      invoiceFieldRow,   // Fila 2
+      ...emptyRowsBeforeFields, // Filas 3-5
+      netAmountRow,      // Fila 6
+      emptyRow,          // Fila 7
+      stationRow,        // Fila 8
+      agencyRow,         // Fila 9
+      addressRow,        // Fila 10
+      buyerRow,          // Fila 11
+      advertiserRow,     // Fila 12
+      productRow,        // Fila 13
+      ...emptyRowsAfterFields, // Filas 14 a 21
+      headerRow,         // Fila 22
+      ...dataRows        // Fila 23 en adelante
     ];
+
 
     const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.aoa_to_sheet(wsData);
@@ -252,7 +258,6 @@ export default class MainController {
     if (!ws["!merges"]) ws["!merges"] = [];
     ws["!merges"].push({ s: { r: 0, c: 0 }, e: { r: 0, c: 5 } }); // A1:F1
 
-    // Aplicar estilos
     // Título
     const titleCell = "A1";
     if (ws[titleCell]) {
@@ -268,10 +273,48 @@ export default class MainController {
     });
 
     XLSX.utils.book_append_sheet(wb, ws, "Contenido");
+
+    // 1. Calcular la última fila ocupada
+    const startRow = 22; // donde inician tus datos después de campos fijos
+    const lastDataRow = startRow + outputRows.length; // fila real donde terminan los datos
+    const baseRow = lastDataRow + 1; // Primera fila disponible después de datos
+
+    // 2. Escribir líneas sucesivas en columna G
+    const summaryLabels = [
+      "Invoice Totals:",
+      "Total Spots",
+      "Gross Amount:",
+      "Agency Commission:",
+      "Net Amount Due:"
+    ];
+
+    summaryLabels.forEach((label, i) => {
+      const cellRef = `G${baseRow + i}`;
+      ws[cellRef] = {
+        t: 's',
+        v: label,
+        s: {
+          font: { bold: true }
+        }
+      };
+    });
+
+    // 3. Expandir el rango !ref manualmente para que Excel lo muestre
+    const currentRef = ws['!ref']; // ej. "A1:H118"
+    if (currentRef) {
+      const [, end] = currentRef.split(":"); // "H118"
+      const match = end.match(/([A-Z]+)(\d+)/);
+      if (match) {
+        const col = match[1]; // "H"
+        const newRef = `A1:${col}${baseRow + summaryLabels.length - 1}`; // A1:H124 por ejemplo
+        ws['!ref'] = newRef;
+      }
+    }
+
     XLSX.writeFile(wb, excelPath);
+
   }
 }
-
 
 /*
 import fs from "fs";
