@@ -1,0 +1,24 @@
+# Ignorar archivos de entorno
+.env
+.env.local
+.env.*.local
+
+# Ignorar archivos de entorno en frontend y backend
+frontend/.env
+frontend/.env.local
+backend/.env
+backend/.env.local
+
+# Ignorar node_modules y build
+**/node_modules
+**/dist
+**/build
+
+# Ignorar carpetas temporales
+.DS_Store
+*.log
+*.tsbuildinfo
+
+# Ignorar otros archivos que no deban subirse
+*.bak
+*.tmp
