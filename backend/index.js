@@ -27,7 +27,8 @@ const allowedOrigins = [
   'http://192.168.1.10:4200',
   'http://localhost:5000',
   'https://maslatinomobile.netlify.app',
-  'https://super-cajeta-50e752.netlify.app'
+  'https://super-cajeta-50e752.netlify.app',
+  'https://excelmaslatino.netlify.app'
 
 ];
 
