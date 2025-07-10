@@ -1,24 +1,43 @@
-# Ignorar archivos de entorno
+# =====================================
+# GLOBAL
+# =====================================
+node_modules/
+dist/
 .env
-.env.local
-.env.*.local
+*.env
+*.log
+.DS_Store
+*.swp
+*.swo
+.idea/
+.vscode/
+Thumbs.db
 
-# Ignorar archivos de entorno en frontend y backend
+# =====================================
+# FRONTEND (Angular)
+# =====================================
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/cache/
 frontend/.env
-frontend/.env.local
+
+# =====================================
+# BACKEND (Node.js)
+# =====================================
+backend/node_modules/
 backend/.env
 backend/.env.local
+backend/.env.*.local
+backend/logs/
+backend/coverage/
+backend/tmp/
+backend/credentials/
+backend/realmediagroup-*.json
 
-# Ignorar node_modules y build
-**/node_modules
-**/dist
-**/build
-
-# Ignorar carpetas temporales
-.DS_Store
-*.log
-*.tsbuildinfo
-
-# Ignorar otros archivos que no deban subirse
+# =====================================
+# OTHER
+# =====================================
 *.bak
 *.tmp
+*.temp
+*.orig

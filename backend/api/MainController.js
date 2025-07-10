@@ -3,7 +3,7 @@ import path from "path";
 import vision from "@google-cloud/vision";
 import XLSX from "xlsx";
 
-process.env.GOOGLE_APPLICATION_CREDENTIALS = "./realmediagroup-ba80ccac0989.json";
+process.env.GOOGLE_APPLICATION_CREDENTIALS = "./realmediagroup-3d40e288316b.json";
 const client = new vision.ImageAnnotatorClient();
 
 export default class MainController {
